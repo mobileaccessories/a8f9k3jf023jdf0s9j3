@@ -34,9 +34,9 @@
 <body>
   <iframe
     id="appFrame"
-    src="https://script.google.com/macros/s/AKfycbw1R-BYiGlShwfMJ5xc436J6IDEj7WEDoUzQ3IvhhQh0y-O5ZV0WSq9rSILH3vowtzOHw/exec?delivery=1"
+    src="https://script.google.com/macros/s/AKfycbw7tvaYnwJmQ6JbUmNKnoPe9nBv32lGOF2j2Kx_2BX4y7g0jaJs498sSOLHaxKRBmT2SQ/exec?delivery=1"
     allow="camera; microphone"
-    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+    sandbox="allow-scripts allow-same-origin allow-forms"
     scrolling="no"
   ></iframe>
 
@@ -67,14 +67,7 @@
       // Optional: attempt to block context menu inside iframe (may fail cross-origin)
       iframe.addEventListener('load', () => {
         try {
-          // Allow context menu inside iframe
           iframe.contentWindow.document.addEventListener('contextmenu', e => e.preventDefault());
-
-          // Make links inside iframe open in new tab
-          const links = iframe.contentWindow.document.getElementsByTagName('a');
-          for (let link of links) {
-            link.setAttribute('target', '_blank');
-          }
         } catch(e) { /* ignore cross-origin errors */ }
       });
     })();
