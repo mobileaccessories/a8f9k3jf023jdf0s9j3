@@ -1,76 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>Embedded Web App (Protected)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embedded Web App</title>
   <style>
-    html, body {
-      height: 100%;
+    body {
       margin: 0;
       padding: 0;
-      background: #fbfbfb;
-      overflow: hidden; /* block scrolling */
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+      background-color: #fbfbfb;
     }
-
     iframe {
-      border: 0;
+      border: none;
       width: 100%;
-      height: 100%;
-      display: block;
-      pointer-events: auto;
-      -webkit-user-select: none;
-      user-select: none;
-      overflow: hidden; /* block iframe scroll */
+      height: 100vh;
     }
-
-    iframe:focus { outline: none; }
   </style>
 </head>
 <body>
   <iframe
-    id="appFrame"
-    src="https://script.google.com/macros/s/AKfycbw7tvaYnwJmQ6JbUmNKnoPe9nBv32lGOF2j2Kx_2BX4y7g0jaJs498sSOLHaxKRBmT2SQ/exec?delivery=1"
+    src="https://script.google.com/macros/s/AKfycbzO4EGc5EvuCKDovOaVr1LQvig9-zI7_ZkMxf6Ac3PdYiFxXpjUPXBTf8Hfj2OvIbDp/exec?delivery=1"
     allow="camera; microphone"
     sandbox="allow-scripts allow-same-origin allow-forms"
-    scrolling="no"
   ></iframe>
-
-  <script>
-    (function () {
-      const iframe = document.getElementById('appFrame');
-
-      // Prevent copy/paste/context menu/drag on parent
-      document.addEventListener('contextmenu', e => e.preventDefault(), {passive:false});
-      ['copy','cut','paste'].forEach(ev => document.addEventListener(ev, e => e.preventDefault()));
-      document.addEventListener('dragstart', e => e.preventDefault());
-      document.addEventListener('selectstart', e => e.preventDefault());
-
-      // Prevent keyboard zoom and shortcuts
-      document.addEventListener('keydown', e => {
-        const ctrlOrMeta = e.ctrlKey || e.metaKey;
-        if (ctrlOrMeta && ['+','-','=','0'].includes(e.key)) e.preventDefault();
-        if (ctrlOrMeta && ['s','p','u'].includes(e.key.toLowerCase())) e.preventDefault();
-      }, {passive:false});
-
-      // Prevent ctrl/cmd + wheel zoom
-      window.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) e.preventDefault(); }, {passive:false});
-
-      // Prevent pinch-to-zoom gestures
-      document.addEventListener('touchstart', e => { if(e.touches && e.touches.length>1) e.preventDefault(); }, {passive:false});
-      document.addEventListener('touchmove', e => { if(e.touches && e.touches.length>1 || e.scale && e.scale!==1) e.preventDefault(); }, {passive:false});
-
-      // Optional: attempt to block context menu inside iframe (may fail cross-origin)
-      iframe.addEventListener('load', () => {
-        try {
-          iframe.contentWindow.document.addEventListener('contextmenu', e => e.preventDefault());
-        } catch(e) { /* ignore cross-origin errors */ }
-      });
-    })();
-  </script>
 </body>
 </html>
