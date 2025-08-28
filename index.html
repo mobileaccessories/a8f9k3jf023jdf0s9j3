@@ -5,14 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Embedded Web App</title>
   <style>
-    body {
+    /* Prevent page scrolling while keeping iframe functional */
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
+      overflow: hidden; /* <-- disable page scrolling */
       background-color: #fbfbfb;
     }
+
+    /* Make iframe fill the viewport without producing scrollbars */
     iframe {
       border: none;
-      width: 100%;
+      position: fixed; /* keep it fixed to the viewport */
+      top: 0;
+      left: 0;
+      width: 100vw;
       height: 100vh;
     }
   </style>
